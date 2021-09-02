@@ -69,6 +69,13 @@ function init() {inquirer
 ${response.descriptioncontent}
         
 ## Table of Contents
+[Description](#description)
+[Installation](#installation)
+[Usage](#usage)
+[License](#license)
+[Contributing](#contributing)
+[Tests](#test)
+[Questions](#questions)
         
 ## Installation
 ${response.installationinstructions}
