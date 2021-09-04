@@ -1,6 +1,7 @@
 // Include packages needed for this application
 const fs = require('fs');
 const inquirer = require('inquirer');
+const generateMarkdown = require('./utils/generateMarkdown');
 
 // TODO: Create an array of questions for user input
 const questions = [
@@ -25,9 +26,10 @@ const questions = [
         name: 'usageinformation',
     },
     {
-        type: 'choice',
+        type: 'list',
         message: 'What type of licensing would you like to use?',
-        name: 'licensing',
+        name: 'license',
+        choices: ['MIT', 'Apache', 'GPL']
     },
     {
         type: 'input',
@@ -63,44 +65,14 @@ const questions = [
 function init() {inquirer
     .prompt(questions)
     .then(response => {
-        var markdown = `# ${response.title}
-
-## Description 
-${response.descriptioncontent}
-        
-## Table of Contents
-[Description](#description)
-[Installation](#installation)
-[Usage](#usage)
-[License](#license)
-[Contributing](#contributing)
-[Tests](#test)
-[Questions](#questions)
-        
-## Installation
-${response.installationinstructions}
-        
-## Usage
-${response.usageinformation}
-        
-## License
-${response.licensing}
-        
-## Contributing
-${response.contributionguidelines}
-        
-## Tests
-${response.testinstructions}
-        
-## Questions
-If you have any questions, please feel free to reach out to me on github here: [${response.gitusername}](${response.giturl}), or by email: ${response.email}`
-    
-        fs.writeFile("README.md", markdown, (err) =>
+        fs.writeFile("README.md", generateMarkdown(response), (err) =>
         err ? console.log(err) : console.log('success')
-        );
+        );  
     })
 
 }
+
+
 
 // Function call to initialize app
 init();
